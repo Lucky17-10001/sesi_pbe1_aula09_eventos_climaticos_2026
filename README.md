@@ -2,8 +2,8 @@
 ## Objetivo
 Conectar o back-end da aplicação web com um banco de dados relacional, utilizando o SGBD MariaDB e a linguagem de programação JavaScript com Node.js.
 #### Documentação
-![Diagrama de Entidade-Relacionamento](../mer_der_conceitual.png)
-![Diagrama de classes](../uml_dc.png)
+![Diagrama de Entidade-Relacionamento](docs/mer_der_conceitual.png)
+![Diagrama de classes](docs/uml_dc.png)
 #### Tecnologias utilizadas
 - SGBD: Sistema de Gerenciamento de Banco de Dados
 - MariaDB: Sistema de Gerenciamento de Banco de Dados relacional, derivado do MySQL.
