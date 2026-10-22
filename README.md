@@ -26,3 +26,5 @@ Conectar o back-end da aplicação web com um banco de dados relacional, utiliza
 - Clique em **Send** e verifique se a lista de usuários é retornada corretamente.
 ## Prints dos testes de login
 ![teste1](docs/prints/login.png)
+![teste2](docs/prints/login2.png)
+![teste3](docs/prints/login3.png)
