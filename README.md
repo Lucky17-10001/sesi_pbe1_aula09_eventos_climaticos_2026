@@ -25,4 +25,4 @@ Conectar o back-end da aplicação web com um banco de dados relacional, utiliza
     - URL: `http://localhost:3000/usuarios`
 - Clique em **Send** e verifique se a lista de usuários é retornada corretamente.
 ## Prints dos testes de login
-![teste1](docs/login.png)
+![teste1](docs/prints/login.png)
