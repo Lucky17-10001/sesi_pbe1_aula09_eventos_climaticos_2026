@@ -42,16 +42,28 @@ const atualizar = (req, res) => {
 
 const excluir = (req, res) => {
     const { id } = req.params
-    const query = 'DELETE FROM usuario WHERE id = ?;'
+
+    const queryEventos = 'DELETE FROM evento WHERE usuarioId = ?;'
     
-    con.query(query, [id], (err, results) => {
-        if (err) {
-            res.status(500).json({ error: 'Erro ao excluir' })
-        } else {
-            res.json({ message: 'Excluído com sucesso' })
+    con.query(queryEventos, [id], (errEventos) => {
+        if (errEventos) {
+            console.error(errEventos)
+            return res.status(500).json({ error: 'Erro ao apagar eventos do usuário' })
         }
+
+        const queryUsuario = 'DELETE FROM usuario WHERE id = ?;'
+        
+        con.query(queryUsuario, [id], (errUsuario, results) => {
+            if (errUsuario) {
+                console.error(errUsuario)
+                return res.status(500).json({ error: 'Erro ao excluir usuário' })
+            } else {
+                res.json({ message: 'Usuário e seus eventos excluídos com sucesso' })
+            }
+        })
     })
 }
+
 
 module.exports = {
     cadastrar,

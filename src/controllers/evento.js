@@ -42,13 +42,15 @@ const atualizar = (req, res) => {
 
 const excluir = (req, res) => {
     const { id } = req.params
+
     const query = 'DELETE FROM evento WHERE id = ?;'
-    
+
     con.query(query, [id], (err, results) => {
         if (err) {
-            res.status(500).json({ error: 'Erro ao excluir' })
+            console.error(err)
+            res.status(500).json({ error: 'Erro ao excluir evento' })
         } else {
-            res.json({ message: 'Excluído com sucesso' })
+            res.json({ message: 'Evento excluído com sucesso' })
         }
     })
 }
