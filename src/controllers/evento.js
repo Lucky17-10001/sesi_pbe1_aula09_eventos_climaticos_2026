@@ -55,9 +55,32 @@ const excluir = (req, res) => {
     })
 }
 
+const resumo = (req, res) => {
+    const query = `
+        SELECT *, 
+        (SELECT AVG(temperaturaMaxima) FROM evento) AS mediaTemperatura 
+        FROM evento;
+    `
+
+    con.query(query, (err, results) => {
+        if (err) {
+            console.error(err)
+            res.status(500).json({ error: 'Erro ao gerar resumo dos eventos' })
+        } else {
+            const media = results.length > 0 ? results[0].mediaTemperatura : 0
+            
+            res.json({
+                totalEventos: results.length,
+                mediaTemperaturaGeral: Number(media).toFixed(2),
+                eventos: results
+            })
+        }
+    })
+}
 module.exports = {
     cadastrar,
     listar,
     atualizar,
-    excluir
+    excluir,
+    resumo
 }
