@@ -26,8 +26,8 @@ Conectar o back-end da aplicação web com um banco de dados relacional, utiliza
 - Clique em **Send** e verifique se a lista de usuários é retornada corretamente.
 ## Prints dos testes de cadastrar usuário
 ![cadastrar1](docs/prints/cadastrar.png)
-![cadastrar2](docs/prints/cadastrar2.png)
 ## Prints dos testes de cadastrar evento
+![cadastrar2](docs/prints/cadastrar2.png)
 ![cadastrarevento1](docs/prints/cadastrarevento.png)
 ![cadastrarevento2](docs/prints/cadastrarevento2.png)
 ## Prints dos testes de listar
