@@ -28,8 +28,8 @@ Conectar o back-end da aplicação web com um banco de dados relacional, utiliza
 ![cadastrar1](docs/prints/cadastrar.png)
 ![cadastrarevento2](docs/prints/cadastrarevento2.png)
 ## Prints dos testes de cadastrar evento
-![cadastrar2](docs/prints/cadastrar2.png)
 ![cadastrarevento1](docs/prints/cadastrarevento.png)
+![cadastrar2](docs/prints/cadastrar2.png)
 ## Prints dos testes de listar
 ![listar1](docs/prints/listar.png)
 ![listar2](docs/prints/listarevento.png)
