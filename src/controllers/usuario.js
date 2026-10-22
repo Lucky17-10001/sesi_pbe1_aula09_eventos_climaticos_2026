@@ -74,7 +74,7 @@ const login = (req, res) => {
             console.error(err)
             res.status(500).json({ error: 'Erro ao tentar fazer login' })
         } else if (results.length === 0) {
-            res.status(404).json({ error: 'Usuário não encontrado ou credenciais inválidas' })
+            res.status(404).json({ error: 'erro 404: Usuário não encontrado ou credenciais inválidas' })
         } else {
             res.json({ message: 'Login realizado com sucesso', usuario: results[0] })
         }
