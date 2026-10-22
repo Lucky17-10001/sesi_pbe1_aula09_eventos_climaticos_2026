@@ -25,7 +25,37 @@ const listar =  (req, res)=>{
     })
 }
 
+const atualizar = (req, res) => {
+    const { id } = req.params
+    const { usuarioId, cidade, tipoEvento, temperaturaMaxima, data, nivelImpacto } = req.body
+    
+    const query = 'UPDATE evento SET usuarioId = ?, cidade = ?, tipoEvento = ?, temperaturaMaxima = ?, data = ?, nivelImpacto = ? WHERE id = ?;'
+    
+    con.query(query, [usuarioId, cidade, tipoEvento, temperaturaMaxima, data, nivelImpacto, id], (err, results) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao atualizar' })
+        } else {
+            res.json({ message: 'Atualizado com sucesso' })
+        }
+    })
+}
+
+const excluir = (req, res) => {
+    const { id } = req.params
+    const query = 'DELETE FROM evento WHERE id = ?;'
+    
+    con.query(query, [id], (err, results) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao excluir' })
+        } else {
+            res.json({ message: 'Excluído com sucesso' })
+        }
+    })
+}
+
 module.exports = {
     cadastrar,
-    listar
+    listar,
+    atualizar,
+    excluir
 }
