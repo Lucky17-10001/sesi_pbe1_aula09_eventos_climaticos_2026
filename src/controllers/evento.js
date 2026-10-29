@@ -41,7 +41,7 @@ const alterar = (req, res) => {
         campos += `${chave} = ?,`
         colunas.push(req.body[chave])
     })
-    campos = campos.slice(0, -1) //Remove a ultima virgula
+    campos = campos.slice(0, -1)
     colunas.push(id)
     const sql = `UPDATE evento SET ${campos} WHERE id = ?;`
     con.query(sql, colunas, (err, results) => {
