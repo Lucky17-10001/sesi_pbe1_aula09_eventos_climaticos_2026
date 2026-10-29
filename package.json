@@ -1,7 +1,7 @@
 {
   "name": "eventos_climaticos",
   "version": "1.0.0",
-  "description": "",
+  "description": "Conectar o back-end da aplicação web com um banco de dados relacional, utilizando o SGBD MariaDB e a linguagem de programação JavaScript com Node.js.\r #### Documentação\r ![Diagrama de Entidade-Relacionamento](docs/mer_der_conceitual.png)\r ![Diagrama de classes](docs/uml_dc.png)\r #### Tecnologias utilizadas\r - SGBD: Sistema de Gerenciamento de Banco de Dados\r - MariaDB: Sistema de Gerenciamento de Banco de Dados relacional, derivado do MySQL.\r - Node.js: Ambiente de execução JavaScript, que permite a execução de código JavaScript fora do navegador.\r #### Realizar teste unitário com o Thunder Client\r - Instale a extensão **Thunder Client** no VS Code.\r - Abra o Thunder Client e crie uma nova requisição POST para cadastrar um usuário:\r     - URL: `http://localhost:3000/usuarios`\r     - Body (JSON):\r ```json\r {\r     \"nome\": \"Carlos Pereira\",\r     \"email\": \"carlos.pereira@example.com\",\r     \"senha\": \"senha123\"\r }\r ```\r - Clique em **Send** e verifique se o usuário foi cadastrado com sucesso.\r - Crie uma nova requisição GET para listar todos os usuários:  \r     - URL: `http://localhost:3000/usuarios`\r - Clique em **Send** e verifique se a lista de usuários é retornada corretamente.\r ## Prints dos testes de cadastrar usuário\r ![cadastrar1](docs/prints/cadastrar.png)\r ![cadastrarevento2](docs/prints/cadastrarevento2.png)\r ## Prints dos testes de cadastrar evento\r ![cadastrarevento1](docs/prints/cadastrarevento.png)\r ![cadastrar2](docs/prints/cadastrar2.png)\r ## Prints dos testes de listar\r ![listar1](docs/prints/listar.png)\r ![listar2](docs/prints/listarevento.png)\r ## Prints dos testes de atualizar usuário\r ![atualizar1](docs/prints/atualizar.png)\r ![atualizar2](docs/prints/atualizar2.png)\r ## Prints dos testes de atualizar evento\r ![atualizarevento1](docs/prints/atualizarevento.png)\r ![atualizarevento2](docs/prints/atualizarevento2.png)\r ## Prints dos testes de excluir usuário\r ![excluir1](docs/prints/excluir.png)\r ![excluir2](docs/prints/excluir2.png)\r ![excluir3](docs/prints/excluir3.png)\r ## Prints dos testes de excluir evento\r ![excluirevento1](docs/prints/excluirevento.png)\r ![excluirevento1](docs/prints/excluirevento2.png)\r ## Prints dos testes de resumo\r ![resumo](docs/prints/resumo.png)\r ## Prints dos testes de login\r ![teste1](docs/prints/login.png)\r ![teste2](docs/prints/login2.png)\r ![teste3](docs/prints/login3.png)",
   "main": "server.js",
   "scripts": {
     "dev": "node --watch server.js",
@@ -17,5 +17,17 @@
     "i": "^0.3.7",
     "mysql": "^2.18.1",
     "npm": "^12.2.0"
-  }
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lucky17-10001/sesi_pbe1_aula09_eventos_climaticos_2026.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lucky17-10001/sesi_pbe1_aula09_eventos_climaticos_2026/issues"
+  },
+  "homepage": "https://github.com/Lucky17-10001/sesi_pbe1_aula09_eventos_climaticos_2026#readme"
 }
