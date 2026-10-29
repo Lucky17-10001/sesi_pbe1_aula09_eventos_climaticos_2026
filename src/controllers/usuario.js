@@ -1,90 +1,94 @@
 const con = require('../db')
 
-const cadastrar = (req, res) => {
-    const { nome, email, senha } = req.body
-    const query = 'INSERT INTO usuario (nome, email, senha) values (?, ?, password(?));'
-    con.query(query, [nome, email, senha], (err, results) => {
+const login = (req, res) => {
+    const { email, senha } = req.body
+    const sql = 'SELECT id, nome, email FROM usuario WHERE email = ? AND senha = password(?);'
+    con.query(sql, [email, senha], (err, results) => {
         if (err) {
             console.error(err)
-            res.status(500).json({ error: 'Erro ao cadastrar usuário' })
+            res.status(500).json({ erro: 'Erro ao listar usuários' })
         } else {
-            res.status(201).json({ message: 'Usuário cadastrado com sucesso', results})
+            if (results.length == 0) {
+                res.status(404).json("Acesso negado, credenciais inválidas")
+            } else {
+                res.json(results)
+            }
         }
     })
 }
 
-const listar =  (req, res)=>{
-    const query = 'SELECT * FROM usuario;'
-    con.query(query, (err, results) =>{
+const cadastrar = (req, res) => {
+    const { nome, email, senha } = req.body
+    try {
+        const sql = 'INSERT INTO usuario (nome, email, senha) VALUES (?, ?, password(?));'
+        con.query(sql, [nome, email, senha], (err, results) => {
+            if (err) {
+                console.error(err)
+                res.status(500).json({ error: 'Erro ao cadastrar usuário' })
+            } else {
+                const novoUsuario = req.body
+                novoUsuario.id = results.insertId
+                res.status(201).json({ message: 'Usuário cadastrado com sucesso', user: novoUsuario })
+            }
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(400).json({ error: 'Erro ao cadastrar usuário', details: 'Informe { nome, email, senha }' })
+    }
+}
+
+const listar = (req, res) => {
+    const sql = 'SELECT * FROM usuario;'
+    con.query(sql, (err, results) => {
         if (err) {
             console.error(err)
             res.status(500).json({ error: 'Erro ao buscar usuários' })
-        } else{
+        } else {
             res.json(results)
         }
     })
 }
 
-const atualizar = (req, res) => {
-    const { id } = req.params
+const alterar = (req, res) => {
     const { nome, email, senha } = req.body
-    
-    const query = 'UPDATE usuario SET nome = ?, email = ?, senha = password(?) WHERE id = ?;'
-    
-    con.query(query, [nome, email, senha, id], (err, results) => {
-        if (err) {
-            res.status(500).json({ error: 'Erro ao atualizar' })
-        } else {
-            res.json({ message: 'Atualizado com sucesso' })
-        }
-    })
+    try {
+        const sql = 'UPDATE usuario SET nome = ?, email = ?, senha = password(?) WHERE id = ?;'
+        con.query(sql, [nome, email, senha, Number(req.params.id)], (err, results) => {
+            if (err) {
+                console.error(err)
+                res.status(500).json({ error: 'Erro ao alterar usuário' })
+            } else {
+                const novoUsuario = req.body
+                novoUsuario.id = results.insertId
+                res.status(202).json({ message: 'Usuário alterado com sucesso', user: novoUsuario })
+            }
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(400).json({ error: 'Erro ao alterar usuário', details: 'Informe { nome, email, senha }' })
+    }
 }
 
 const excluir = (req, res) => {
-    const { id } = req.params
-
-    const queryEventos = 'DELETE FROM evento WHERE usuarioId = ?;'
-    
-    con.query(queryEventos, [id], (errEventos) => {
-        if (errEventos) {
-            console.error(errEventos)
-            return res.status(500).json({ error: 'Erro ao apagar eventos do usuário' })
-        }
-
-        const queryUsuario = 'DELETE FROM usuario WHERE id = ?;'
-        
-        con.query(queryUsuario, [id], (errUsuario, results) => {
-            if (errUsuario) {
-                console.error(errUsuario)
-                return res.status(500).json({ error: 'Erro ao excluir usuário' })
-            } else {
-                res.json({ message: 'Usuário e seus eventos excluídos com sucesso' })
-            }
-        })
-    })
-}
-
-const login = (req, res) => {
-    const { email, senha } = req.body
-
-    const query = 'SELECT id, nome, email FROM usuario WHERE email = ? AND senha = password(?);'
-
-    con.query(query, [email, senha], (err, results) => {
+    const id = Number(req.params.id)
+    const sql = 'DELETE FROM usuario WHERE id = ?;'
+    con.query(sql, [id], (err, results) => {
         if (err) {
             console.error(err)
-            res.status(500).json({ error: 'Erro ao tentar fazer login' })
-        } else if (results.length === 0) {
-            res.status(404).json({ error: 'erro 404: Usuário não encontrado ou credenciais inválidas' })
+            res.status(500).json({ erro: 'Erro ao excluir usuário', msg: err.sqlMessage })
         } else {
-            res.json({ message: 'Login realizado com sucesso', usuario: results[0] })
+            if (results.affectedRows == 1)
+                res.json("Registro excluído com sucesso")
+            else
+                res.status(404).json({ msg: "Nada alerado no banco de dados", erro: results })
         }
     })
 }
 
 module.exports = {
+    login,
     cadastrar,
     listar,
-    atualizar,
-    excluir,
-    login
+    alterar,
+    excluir
 }
