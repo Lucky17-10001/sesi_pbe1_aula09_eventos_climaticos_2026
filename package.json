@@ -13,7 +13,7 @@
   "type": "commonjs",
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1",
+    "express": "^5.3.0",
     "i": "^0.3.7",
     "mysql": "^2.18.1",
     "npm": "^12.2.0"
@@ -21,7 +21,6 @@
   "directories": {
     "doc": "docs"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lucky17-10001/sesi_pbe1_aula09_eventos_climaticos_2026.git"
